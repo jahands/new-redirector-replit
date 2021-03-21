@@ -25,10 +25,13 @@ const langMap = {
     'css': 'html', // Seems logical
 
     // Requests
-    // @_pranavnt
+    // https://twitter.com/_pranavnt/status/1373751282784108547
     'node': 'nodejs',
     'next': 'nextjs', // Goes to template spotlight page
-    'golang': 'go'
+    'golang': 'go',
+
+    // https://twitter.com/replit/status/1373774122778513408
+    'kb': 'kaboom'
 };
 
 // Help page. WIP
