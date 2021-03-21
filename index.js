@@ -37,7 +37,7 @@ app.get('/help', (req, res) => {
 
 app.get('/:lang?', (req, res) => {
     let lang = req.params.lang || 'bash';
-    if (langMap[lang]) {
+    if (langMap.hasOwnProperty(lang)) {
         lang = langMap[lang];
     }
     res.redirect(`https://repl.it/languages/${lang}`);
