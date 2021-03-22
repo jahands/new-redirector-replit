@@ -4,12 +4,12 @@ const path = require('path');
 const app = express();
 
 const langMap = {
-    // PYTHON 3
+    // Python 3
     'python': 'python3', // python2 is deprecated so default to 3
     'py': 'python3',
     'py3': 'python3',
 
-    // PYTHON 2
+    // Python 2
     'python2': 'python',
     'py2': 'python',
 
@@ -17,7 +17,7 @@ const langMap = {
     'js': 'nodejs',
     'ts': 'typescript',
 
-    // MSC language shortcuts
+    // Msc language shortcuts
     'sh': 'bash', // Just to make it consistent
     'lol': 'lolcode',
     'cs': 'coffeescript',
