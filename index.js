@@ -23,6 +23,7 @@ const langMap = {
     'cs': 'coffeescript',
     'c++': 'cpp', // This way you can use either cpp or c++
     'css': 'html', // Seems logical
+    'brainf': 'brainfuck', // to match the name shown in the UI
 
     // Requests
     // https://twitter.com/_pranavnt/status/1373751282784108547
