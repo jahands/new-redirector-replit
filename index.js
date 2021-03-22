@@ -33,7 +33,10 @@ const langMap = {
     'golang': 'go',
 
     // https://twitter.com/replit/status/1373774122778513408
-    'kb': 'kaboom'
+    'kb': 'kaboom',
+
+    // https://twitter.com/mirobotdev/status/1373866600420540418
+    'web': 'html' // A bit generic but I think it's a good mapping
 };
 
 // Help page. WIP
