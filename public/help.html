@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-     crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <title>repl.new shortcuts</title>
 </head>
@@ -17,9 +17,9 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-     crossorigin="anonymous">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous">
+        </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
@@ -28,30 +28,79 @@
     -->
     <script type="application/javascript">
         function updateTable() {
-            var langs = JSON.parse('{"languages":[{"name":"Python 3","shortcuts":["py","py3","python"]},{"name":"Python 2","shortcuts":["py2","python2"]},{"name":"NodeJS","shortcuts":["js","node","nodejs"]},{"name":"TypeScript","shortcuts":["ts","typescript"]},{"name":"Bash","shortcuts":["bash","typescript"]},{"name":"LOLCODE","shortcuts":["lol","lolcode"]},{"name":"CoffeeScript","shortcuts":["cs","coffeescript"]},{"name":"C++","shortcuts":["c++","cpp"]},{"name":"HTML/CSS/JS","shortcuts":["html","css","web"]},{"name":"Go (Golang)","shortcuts":["go","golang"]},{"name":"NextJS","shortcuts":["next","nextjs"]},{"name":"Kaboom (beta)","shortcuts":["kb","kaboom"]},{"name":"R lang","shortcuts":["r","rlang"]},{"name":"BrainF","shortcuts":["brainf"]}]}')
-            console.log(langs)
-            var table = document.getElementById("langlist")
-            var row = table.insertRow(0)
-            var cell1 = row.insertCell(0)
-            var cell2 = row.insertCell(1)
-            cell1.innerHTML = "Name"
-            cell2.innerHTML = "Shortcuts"
-            langs.languages.forEach(l => {
-                row = table.insertRow()
-                cell1 = row.insertCell(0)
-                cell2 = row.insertCell(1)
-                cell1.innerHTML = l.name
-                cell2.innerHTML = l.shortcuts.join(', ')
+            let langs = {
+                languages: [
+                    { name: 'Python 3', shortcuts: ['py', 'py3', 'python'] },
+                    { name: 'Python 2', shortcuts: ['py2', 'python2'] },
+                    { name: 'NodeJS', shortcuts: ['js', 'node', 'nodejs'] },
+                    { name: 'TypeScript', shortcuts: ['ts', 'typescript'] },
+                    { name: 'Bash', shortcuts: ['bash', 'typescript'] },
+                    { name: 'LOLCODE', shortcuts: ['lol', 'lolcode'] },
+                    { name: 'CoffeeScript', shortcuts: ['cs', 'coffeescript'] },
+                    { name: 'C++', shortcuts: ['c++', 'cpp'] },
+                    { name: 'HTML/CSS/JS', shortcuts: ['html', 'css', 'web'] },
+                    { name: 'Go (Golang)', shortcuts: ['go', 'golang'] },
+                    { name: 'NextJS', shortcuts: ['next', 'nextjs'] },
+                    { name: 'Kaboom (beta)', shortcuts: ['kb', 'kaboom'] },
+                    { name: 'R lang', shortcuts: ['r', 'rlang'] },
+                    { name: 'BrainF', shortcuts: ['brainf'] }
+                ]
+            }
+
+            function generateTableHead(table, data) {
+                let thead = table.createTHead();
+                let row = thead.insertRow();
+                for (let key of data) {
+                    let th = document.createElement("th");
+                    let formattedKey = `${key[0].toUpperCase()}${key.substr(1)}`
+                    let text = document.createTextNode(formattedKey);
+                    th.appendChild(text);
+                    row.appendChild(th);
+                }
+            }
+
+            function generateTable(table, data) {
+                for (let element of data) {
+                    let row = table.insertRow();
+                    for (key in element) {
+                        let cell = row.insertCell();
+                        let formattedText = element[key]
+                        if (Array.isArray(formattedText)) {
+                            formattedText = formattedText.join(', ')
+                        }
+                        let text = document.createTextNode(formattedText);
+                        cell.appendChild(text);
+                    }
+                }
+            }
+
+            let table = document.querySelector("table");
+            let data = Object.keys(langs.languages[0]);
+            generateTableHead(table, data);
+            generateTable(table, langs.languages);
+        }
+
+        function ready(callback) {
+            // in case the document is already rendered
+            if (document.readyState != 'loading') callback();
+            // modern browsers
+            else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+            // IE <= 8
+            else document.attachEvent('onreadystatechange', function () {
+                if (document.readyState == 'complete') callback();
             });
         }
-        window.onload = function() {
-            updateTable()
+        window.onload = function () {
+            ready(function () {
+                updateTable()
+            })
         }
     </script>
     <h1>Replit language shortcuts available with repl.new</h1>
     <div class="container">
-        <table id="langlist"></table>
+        <table id="langlist" class="table"></table>
     </div>
+    <table id="table2" class="table"></table>
 </body>
 
 </html>
