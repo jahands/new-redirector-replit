@@ -17,7 +17,10 @@
             font-size: 16px;
         }
 
-        h1,h2,h3,p {
+        h1,
+        h2,
+        h3,
+        p {
             color: white;
         }
 
@@ -76,12 +79,14 @@
                 let thead = table.createTHead();
                 let row = thead.insertRow();
                 for (let key of data) {
-                    let th = document.createElement("th");
-                    th.scope = "col"
-                    let formattedKey = `${key[0].toUpperCase()}${key.substr(1)}`
-                    let text = document.createTextNode(formattedKey);
-                    th.appendChild(text);
-                    row.appendChild(th);
+                    if (key !== 'meta') {
+                        let th = document.createElement("th");
+                        th.scope = "col"
+                        let formattedKey = `${key[0].toUpperCase()}${key.substr(1)}`
+                        let text = document.createTextNode(formattedKey);
+                        th.appendChild(text);
+                        row.appendChild(th);
+                    }
                 }
             }
 
@@ -89,13 +94,15 @@
                 for (let element of data) {
                     let row = table.insertRow();
                     for (key in element) {
-                        let cell = row.insertCell();
-                        let formattedText = element[key]
-                        if (Array.isArray(formattedText)) {
-                            formattedText = formattedText.join(', ')
+                        if (key !== 'meta') {
+                            let cell = row.insertCell();
+                            let formattedText = element[key]
+                            if (Array.isArray(formattedText)) {
+                                formattedText = formattedText.join(', ')
+                            }
+                            let text = document.createTextNode(formattedText);
+                            cell.appendChild(text);
                         }
-                        let text = document.createTextNode(formattedText);
-                        cell.appendChild(text);
                     }
                     // Generate url columns
                     // Short url
