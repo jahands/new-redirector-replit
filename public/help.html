@@ -52,6 +52,7 @@
                 let row = thead.insertRow();
                 for (let key of data) {
                     let th = document.createElement("th");
+                    th.scope = "col"
                     let formattedKey = `${key[0].toUpperCase()}${key.substr(1)}`
                     let text = document.createTextNode(formattedKey);
                     th.appendChild(text);
@@ -76,8 +77,8 @@
 
             let table = document.querySelector("table");
             let data = Object.keys(langs.languages[0]);
-            generateTableHead(table, data);
             generateTable(table, langs.languages);
+            generateTableHead(table, data);
         }
 
         function ready(callback) {
@@ -100,7 +101,6 @@
     <div class="container">
         <table id="langlist" class="table"></table>
     </div>
-    <table id="table2" class="table"></table>
 </body>
 
 </html>
