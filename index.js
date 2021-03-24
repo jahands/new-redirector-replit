@@ -39,6 +39,8 @@ const langMap = {
     'web': 'html' // A bit generic but I think it's a good mapping
 };
 
+// For static html, etc
+app.use('/static', express.static('public'))
 // Help page. WIP
 app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'help.html'));

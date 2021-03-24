@@ -10,6 +10,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
+    <style>
+        body {
+            background-color: #171D2D
+        }
+
+        h1 {
+            color: white
+        }
+        a {
+            color: white
+        }
+    </style>
     <title>repl.new shortcuts</title>
 </head>
 
@@ -72,13 +84,25 @@
                         let text = document.createTextNode(formattedText);
                         cell.appendChild(text);
                     }
+                    // Generate url columns
+                    // Short url
+                    let cell = row.insertCell();
+                    let slug = element.shortcuts[0]
+                    let url = `https://repl.new/${slug}`
+                    cell.innerHTML = `<a href='${url}'>repl.new/${slug}</a>`
+
+                    // Long url
+                    cell = row.insertCell();
+                    slug = element.shortcuts[element.shortcuts.length - 1]
+                    url = `https://repl.new/${slug}`
+                    cell.innerHTML = `<a href='${url}'>repl.new/${slug}</a>`
                 }
             }
 
             let table = document.querySelector("table");
             let data = Object.keys(langs.languages[0]);
             generateTable(table, langs.languages);
-            generateTableHead(table, data);
+            generateTableHead(table, [...data, 'Short URL', 'Long URL']);
         }
 
         function ready(callback) {
@@ -97,9 +121,9 @@
             })
         }
     </script>
-    <h1>Replit language shortcuts available with repl.new</h1>
     <div class="container">
-        <table id="langlist" class="table"></table>
+        <h1>Replit language shortcuts available with repl.new</h1>
+        <table id="langlist" class="table table-bordered table-dark"></table>
     </div>
 </body>
 
