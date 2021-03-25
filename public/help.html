@@ -365,13 +365,13 @@
                     let cell = row.insertCell();
                     let slug = element.shortcuts[0]
                     let url = `https://repl.new/${slug}`
-                    cell.innerHTML = `<a href='${url}'>repl.new/${slug}</a>`
+                    cell.innerHTML = `<a href='${url}'>repl.new/<b>${slug}</b></a>`
 
                     // Long url
                     cell = row.insertCell();
                     slug = element.shortcuts[element.shortcuts.length - 1]
                     url = `https://repl.new/${slug}`
-                    cell.innerHTML = `<a href='${url}'>repl.new/${slug}</a>`
+                    cell.innerHTML = `<a href='${url}'>repl.new/<b>${slug}</b></a>`
                 }
             }
 
