@@ -16,6 +16,7 @@ const langMap = {
     // JS languages
     'js': 'nodejs',
     'ts': 'typescript',
+    'react': 'reactjs', // 'react' doesn't work.
 
     // Msc language shortcuts
     'sh': 'bash', // Just to make it consistent
