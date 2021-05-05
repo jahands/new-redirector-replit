@@ -26,6 +26,7 @@ const langMap = {
     'css': 'html', // Seems logical
     'brainf': 'brainfuck', // to match the name shown in the UI
     'r': 'rlang', // This seems more expected to me
+    'draw': 'bash', // I kept doing /draw to make a quick drawing lol
 
     // Requests
     // https://twitter.com/_pranavnt/status/1373751282784108547
