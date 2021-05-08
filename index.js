@@ -48,12 +48,13 @@ app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'help.html'));
 });
 
-app.get('/:lang?', (req, res) => {
+app.get('/:lang?/:name?', (req, res) => {
     let lang = req.params.lang || 'bash';
     if (langMap.hasOwnProperty(lang)) {
         lang = langMap[lang];
     }
-    res.redirect(`https://repl.it/languages/${lang}`);
+    const name = `?name=${req.params.name}` || ''
+    res.redirect(`https://replit.com/new/${lang}${name}`);
 });
 
 app.listen(3000, () => {
