@@ -53,7 +53,7 @@ app.get('/:lang?/:name?', (req, res) => {
     if (langMap.hasOwnProperty(lang)) {
         lang = langMap[lang];
     }
-    const name = `?name=${req.params.name}` || ''
+    const name = req.params.name ? `?name=${req.params.name}` : ''
     res.redirect(`https://replit.com/new/${lang}${name}`);
 });
 
