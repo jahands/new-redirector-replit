@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const fetch = require('node-fetch');
-const Database = require("@replit/database")
+const Database = require("@replit/database");
 
-const db = new Database()
+const db = new Database();
 
 const app = express();
 
@@ -84,21 +84,21 @@ app.listen(3000, () => {
 });
 
 async function getLanguageKeys() {
-    const dbkey = 'x:language_keys_cache'
-    const max_age = 86400 * 1000 // 1 day
-    now = Date.now()
+    const dbkey = 'x:language_keys_cache';
+    const max_age = 86400 * 1000; // 1 day
+    now = Date.now();
     if (now - language_keys_memcache.timestamp < max_age) {
         return language_keys_memcache.language_keys;
     }
-    let cached = null
+    let cached = null;
     try {
-        cached = await db.get(dbkey)
+        cached = await db.get(dbkey);
         // Use cached data in Replit db if it's still fresh
         // Great for when the repl reboots often
         if (cached !== null && now - cached.timestamp < max_age) {
             language_keys_memcache.language_keys = cached.language_keys;
             language_keys_memcache.timestamp = Date.now();
-            return cached.language_keys
+            return cached.language_keys;
         }
     } catch (e) {
         // Continue and just get from upstream
@@ -116,9 +116,9 @@ async function getLanguageKeys() {
     } catch (e) {
         // Use cached if we fail to get upstream
         if (language_keys_memcache.language_keys.length > 0)
-            return language_keys_memcache.language_keys
+            return language_keys_memcache.language_keys;
         if (cached !== null && cached.language_keys.length > 0)
-            return cached.language_keys
+            return cached.language_keys;
         throw e // If both of those fail then throw upstream
     }
 }
