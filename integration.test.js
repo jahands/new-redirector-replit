@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 // These tests test the actual http redirects of the service
 // to ensure that the correct responses are being given.
-// run with `jest` or `npm run test`
+// Run with `jest` or `npm run test`
 
 const baseUrl = 'https://new-redirector.amasad.repl.co'
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
