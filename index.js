@@ -52,6 +52,7 @@ let language_keys_memcache = {
 
 // For static html, etc
 app.use('/static', express.static('public'));
+
 // Help page. WIP
 app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'help.html'));
@@ -122,6 +123,7 @@ async function getLanguageKeys() {
         throw e // If both of those fail then throw upstream
     }
 }
+
 async function isValidLanguageKey(name) {
     try {
         if (langMap.hasOwnProperty(name)) {
