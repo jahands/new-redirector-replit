@@ -17,37 +17,37 @@ async function match(req_path) {
         .replace('https://replit.com', '');
 }
 
-test('No parameters:\n\t/ -> /new/bash', () => {
+test('No parameters:\n\t\t/ -> /new/bash', () => {
     return match('/').then(path => {
         expect(path).toBe('/new/bash');
     });
 });
 
-test('Name but no language:\n\t/some_name -> /new/bash?name=some_name', () => {
+test('Name but no language:\n\t\t/some_name -> /new/bash?name=some_name', () => {
     return match('/some_name').then(path => {
         expect(path).toBe('/new/bash?name=some_name');
     });
 });
 
-test('Language (non-shortcut):\n\t/deno -> /new/deno', () => {
+test('Language (non-shortcut):\n\t\t/deno -> /new/deno', () => {
     return match('/deno').then(path => {
         expect(path).toBe('/new/deno');
     });
 });
 
-test('Language (non-shortcut) + name:\n\t/deno/some_name -> /new/deno?name=some_name', () => {
+test('Language (non-shortcut) + name:\n\t\t/deno/some_name -> /new/deno?name=some_name', () => {
     return match('/deno/some_name').then(path => {
         expect(path).toBe('/new/deno?name=some_name');
     });
 });
 
-test('Language (shortcut):\n\t/py -> /new/python3', () => {
+test('Language (shortcut):\n\t\t/py -> /new/python3', () => {
     return match('/py').then(path => {
         expect(path).toBe('/new/python3');
     });
 });
 
-test('Language (shortcut) + name:\n\t/py/some_name -> /new/python3?name=some_name', () => {
+test('Language (shortcut) + name:\n\t\t/py/some_name -> /new/python3?name=some_name', () => {
     return match('/py/some_name').then(path => {
         expect(path).toBe('/new/python3?name=some_name');
     });
