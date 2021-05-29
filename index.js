@@ -107,14 +107,18 @@ async function getLanguageKeys() {
     try {
         // Update from upstream
         const url = 'https://replit-language-api.uuid.rocks/api/languages/keys';
-        const res = await fetch(url);
-        const json = await res.json();
-        const keys = json.language_keys;
+        const keys = await fetch(url)
+            .then(res => res.json()).then(json => json.language_keys)
+
+        if (!keys || keys.length <= 0) {
+            throw new Error('Something went wrong getting keys from upstream api')
+        }
         language_keys_memcache.language_keys = keys;
         language_keys_memcache.timestamp = Date.now();
         await db.set(dbkey, language_keys_memcache);
         return keys;
     } catch (e) {
+        console.log(e)
         // Use cached if we fail to get upstream
         if (language_keys_memcache.language_keys.length > 0)
             return language_keys_memcache.language_keys;
