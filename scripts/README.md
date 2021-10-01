@@ -2,4 +2,4 @@ gen-lang-list.ps1 adds missing languages parsed from the languages section of re
 
 May add language descriptions in the future to languages.json
 
-Right now I'm manually converting languages.json to JS and copying to help.html
+Right now I'm manually copying languages.json to help.html
