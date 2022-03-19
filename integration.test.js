@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 // to ensure that the correct responses are being given.
 // Run with `jest` or `npm run test`
 
-const baseUrl = 'https://new-redirector.amasad.repl.co'
+const baseUrl = 'https://new-redirector.util.repl.co'
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
 const headers = {
     'User-Agent': userAgent
