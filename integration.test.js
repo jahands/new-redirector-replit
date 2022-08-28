@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 // to ensure that the correct responses are being given.
 // Run with `jest` or `npm run test`
 
-describe('Redirector', () => {
+describe(`Redirector`, () => {
     const baseUrl = 'https://new-redirector.util.repl.co'
     const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36"
     const headers = {
@@ -18,37 +18,43 @@ describe('Redirector', () => {
             .replace('https://replit.com', '');
     }
 
-    test('No parameters:\n\t\t/ -> /new/bash', async () => {
-        const path = await match('/');
-        expect(path).toBe('/new/bash');
-    });
+    test(`No parameters:
+        / -> /new/bash`, async () => {
+            const path = await match('/');
+            expect(path).toBe('/new/bash');
+        });
 
-    test('Name but no language:\n\t\t/some_name -> /new/bash?name=some_name', async () => {
-        const path = await match('/some_name');
-        expect(path).toBe('/new/bash?name=some_name');
-    });
+    test(`Name but no language:
+        /some_name -> /new/bash?name=some_name`, async () => {
+            const path = await match('/some_name');
+            expect(path).toBe('/new/bash?name=some_name');
+        });
 
-    test('Language (non-shortcut):\n\t\t/deno -> /new/deno', async () => {
-        const path = await match('/deno');
-        expect(path).toBe('/new/deno');
-    });
+    test(`Language (non-shortcut):
+        /deno -> /new/deno`, async () => {
+            const path = await match('/deno');
+            expect(path).toBe('/new/deno');
+        });
 
-    test('Language (non-shortcut) + name:\n\t\t/deno/some_name -> /new/deno?name=some_name', async () => {
-        const path = await match('/deno/some_name');
-        expect(path).toBe('/new/deno?name=some_name');
-    });
+    test(`Language (non-shortcut) + name:
+        /deno/some_name -> /new/deno?name=some_name`, async () => {
+            const path = await match('/deno/some_name');
+            expect(path).toBe('/new/deno?name=some_name');
+        });
 
-    test('Language (shortcut):\n\t\t/py -> /new/python3', async () => {
-        const path = await match('/py');
-        expect(path).toBe('/new/python3');
-    });
+    test(`Language (shortcut):
+        /py -> /new/python3`, async () => {
+            const path = await match('/py');
+            expect(path).toBe('/new/python3');
+        });
 
-    test('Language (shortcut) + name:\n\t\t/py/some_name -> /new/python3?name=some_name', async () => {
-        const path = await match('/py/some_name');
-        expect(path).toBe('/new/python3?name=some_name');
-    });
+    test(`Language (shortcut) + name:
+        /py/some_name -> /new/python3?name=some_name`, async () => {
+            const path = await match('/py/some_name');
+            expect(path).toBe('/new/python3?name=some_name');
+        });
 
-    test('Make sure help page appears to exist', async () => {
+    test(`Make sure help page appears to exist`, async () => {
         const res = await fetch(baseUrl + '/help', { headers: headers })
         expect(res.status).toBe(200);
         const text = await res.text()
