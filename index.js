@@ -59,6 +59,11 @@ app.get('/help', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'help.html'));
 });
 
+// instant GitHub imports
+app.get('/github/:username/:repository', async (req, res) => {
+    res.redirect(`https://replit.com/new/github/${req.params.username}/${req.params.repository}`)
+})
+
 app.get('/:lang?/:name?', async (req, res) => {
     let lang = req.params.lang || 'bash';
     if (langMap.hasOwnProperty(lang)) {

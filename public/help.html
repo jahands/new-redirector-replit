@@ -102,10 +102,26 @@
                 }
             }
 
+            function generateGitHubRow(table) {
+                let githubRow = table.insertRow();
+                let cell = githubRow.insertCell();
+                let text = document.createTextNode('GitHub');
+                cell.appendChild(text);
+                cell = githubRow.insertCell();
+                text = document.createTextNode('—');
+                cell.appendChild(text);
+                cell = githubRow.insertCell();
+                text = document.createTextNode('—');
+                cell.appendChild(text);
+                cell = githubRow.insertCell();
+                cell.innerHTML = `<a href='https://repl.new/github/username/repository'>repl.new/<b>github/[username]/[repository]</b></a>`
+            }
+
             let table = document.querySelector("table");
             let data = Object.keys(langs.languages[0]);
             generateTable(table, langs.languages);
             generateTableHead(table, [...data, 'Short URL', 'Long URL']);
+            generateGitHubRow(table)
         }
 
         function ready(callback) {
