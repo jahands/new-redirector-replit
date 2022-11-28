@@ -19,15 +19,15 @@ describe(`Redirector`, () => {
     }
 
     test(`No parameters:
-        / -> /new/bash`, async () => {
+        / -> /new/nix`, async () => {
             const path = await match('/');
-            expect(path).toBe('/new/bash');
+            expect(path).toBe('/new/nix');
         });
 
     test(`Name but no language:
-        /some_name -> /new/bash?name=some_name`, async () => {
+        /some_name -> /new/nix?name=some_name`, async () => {
             const path = await match('/some_name');
-            expect(path).toBe('/new/bash?name=some_name');
+            expect(path).toBe('/new/nix?name=some_name');
         });
 
     test(`Language (non-shortcut):

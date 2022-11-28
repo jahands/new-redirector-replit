@@ -33,6 +33,8 @@ const langMap = {
     'draw': 'bash', // I kept doing /draw to make a quick drawing lol
     'rb': 'ruby',
 
+    'nix': 'nix',
+
     // Requests
     // https://twitter.com/_pranavnt/status/1373751282784108547
     'node': 'nodejs',
@@ -65,7 +67,7 @@ app.get('/github/:username/:repository', async (req, res) => {
 })
 
 app.get('/:lang?/:name?', async (req, res) => {
-    let lang = req.params.lang || 'bash';
+    let lang = req.params.lang || 'nix';
     if (langMap.hasOwnProperty(lang)) {
         lang = langMap[lang];
     }
@@ -75,11 +77,11 @@ app.get('/:lang?/:name?', async (req, res) => {
         if (name === '') {
             // Assume they only specified the name
             name = lang;
-            lang = 'bash';
+            lang = 'nix';
         } else {
             // They specified a name but an invalid language
-            // default to bash
-            lang = 'bash';
+            // default to blank repl
+            lang = 'nix';
         }
     }
     let nameParam = name !== '' ? `?name=${name}` : '';
