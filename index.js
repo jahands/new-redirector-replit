@@ -95,7 +95,7 @@ app.listen(3000, () => {
 async function getLanguageKeys() {
     const dbkey = 'x:language_keys_cache';
     const max_age = 86400 * 1000; // 1 day
-    now = Date.now();
+    const now = Date.now();
     if (now - language_keys_memcache.timestamp < max_age) {
         return language_keys_memcache.language_keys;
     }
@@ -115,8 +115,9 @@ async function getLanguageKeys() {
     try {
         // Update from upstream
         const url = 'https://replit-language-api.uuid.rocks/api/languages/keys';
-        const keys = await fetch(url)
-            .then(res => res.json()).then(json => json.language_keys)
+        const keys = await fetch(url, {
+            headers: { 'User-Agent': 'x-replit-redirector' }
+        }).then(res => res.json()).then(json => json.language_keys)
 
         if (!keys || keys.length <= 0) {
             throw new Error('Something went wrong getting keys from upstream api')
@@ -130,6 +131,7 @@ async function getLanguageKeys() {
         // Use cached if we fail to get upstream
         if (language_keys_memcache.language_keys.length > 0)
             return language_keys_memcache.language_keys;
+        // Serve cached from replit db, even if it's a bit stale
         if (cached !== null && cached.language_keys.length > 0)
             return cached.language_keys;
         throw e // If both of those fail then throw upstream
